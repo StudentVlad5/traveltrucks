@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #101828;
+}
+
+@theme {
+  /* Основні кольори */
+  --color-main: #101828;
+  --color-white: #ffffff;
+
+  /* Відтінки сірого */
+  --color-gray-dark: #475467;
+  --color-gray-medium: #6c717b;
+  --color-gray-light: #dadde1;
+  --color-gray-soft: #f2f4f7;
+  --color-gray-ghost: #f7f7f7;
+
+  /* Акцентні кольори */
+  --color-accent-red: #e44848;
+  --color-accent-red-dark: #d84343;
+  --color-accent-yellow: #ffc531;
+
+  /* Шрифти */
+  --font-inter: var(--font-inter);
+
+  /* Накреслення (Weight) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --tracking-tight-sm: -0.01em;
+
+  --leading-tight-compact: 0.67; /* 67% */
+  --leading-relaxed-custom: 1.33; /* 133% */
+  --leading-normal-custom: 1.5; /* 150% */
+  /* animation */
+  --keyframes-fade-in-down: {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  };
+  --animation-fade-in-down: fade-in-down 0.6s ease-out forwards;
+}
+
+/* Створюємо семантичні класи для повторного використання */
+@utility h1-hero {
+  @apply font-semibold text-[48px] leading-[0.67];
+}
+
+@utility h2-title {
+  @apply font-semibold text-[24px] leading-[1.33];
+}
+
+@utility body-main {
+  @apply font-medium text-[16px] leading-[1.5] tracking-[-0.01em];
+}
+
+/* Налаштування базових стилів */
+@layer base {
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: white;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

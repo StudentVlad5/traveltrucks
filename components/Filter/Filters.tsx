@@ -17,6 +17,7 @@ import { Button } from "../UI/Button/Button";
 import MapIcon from "@/assets/icons/default_map.svg";
 import { BooleanFilterKeys, FiltersState, VehicleType } from "@/types/filters";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export const Filters = ({
   setVisibleCount,
@@ -151,24 +152,28 @@ export const Filters = ({
           </div>
         </div>
       </div>
-
-      <Button
-        onClick={handleSearch}
-        variant="primary"
-        disabled={!isDirty}
-        className={`
+      <motion.div
+        animate={isDirty ? { scale: [1, 1.02, 1] } : {}}
+        transition={{ repeat: Infinity, duration: 2 }}
+      >
+        <Button
+          onClick={handleSearch}
+          variant="primary"
+          disabled={!isDirty}
+          className={`
     w-[173px] py-4 transition
     ${!isDirty ? "opacity-50 cursor-not-allowed" : ""}
   `}
-      >
-        Search
-      </Button>
+        >
+          Search
+        </Button>
+      </motion.div>
       {hasAnyFilters && (
         <Button
           onClick={handleReset}
           className="w-[173px] py-4 text-gray-medium underline hover:text-accent-red transition-colors text-sm font-medium"
         >
-          Clear all filters
+          Clear
         </Button>
       )}
     </aside>

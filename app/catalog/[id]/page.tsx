@@ -1,32 +1,62 @@
-"use client";
-import { selectCurrentItem } from "@/store/Camper/camperSelectors";
-import { useAppSelector } from "@/store/hooks";
-import { CamperFeatures } from "@/components/CamperFeatures/CamperFeatures";
-import { VEHICLE_DETAILS_CONFIG } from "@/helper/CONST";
-import { Camper } from "@/types/truck";
-import { DetailRow } from "@/components/DetailRow/DetailRow";
+import { Metadata } from "next";
+import { getCamperById } from "@/helper/api/api";
+import FeaturesPage from "@/components/FeaturesPage/FeaturesPage";
 
-export default function FeaturesPage() {
-  const camper = useAppSelector(selectCurrentItem);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  console.log("id", id);
+  const camper = await getCamperById(id);
+
+  if (!camper) return { title: "Camper not found" };
+
+  return {
+    title: `${camper.name} | Rent for $${camper.price}`,
+    description: camper.description.substring(0, 160),
+    openGraph: {
+      images: [camper.gallery[0]?.original],
+    },
+  };
+}
+type Props = {
+  params: Promise<{ id: string }>;
+};
+
+export default async function CamperDetailPage(props: Props) {
+  const { id } = await props.params;
+  const camper = await getCamperById(id);
+
+  if (!camper) return null;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: camper.name,
+    image: camper.gallery.map((img: { original: string }) => img.original),
+    description: camper.description,
+    offers: {
+      "@type": "Offer",
+      price: camper.price,
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: camper.rating,
+      reviewCount: camper.reviews.length,
+    },
+  };
 
   return (
-    <div className="bg-inputs p-6 md:p-10 rounded-2xl">
-      <div className="flex flex-wrap gap-2 mb-10">
-        {camper && <CamperFeatures camper={camper} />}
-      </div>
-
-      <h3 className="text-xl font-semibold mb-6 border-b border-gray-light pb-6">
-        Vehicle details
-      </h3>
-      <div className="space-y-4">
-        {camper &&
-          VEHICLE_DETAILS_CONFIG.map(({ label, key }) => {
-            const value = camper[key as keyof Camper];
-            if (!camper) return null;
-
-            return <DetailRow key={key} label={label} value={String(value)} />;
-          })}
-      </div>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <FeaturesPage initialData={camper} />
+    </>
   );
 }

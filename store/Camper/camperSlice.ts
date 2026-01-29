@@ -21,6 +21,7 @@ const camperSlice = createSlice({
     clearCamper: (state) => {
       state.item = null;
       state.error = null;
+      state.isLoading = false;
     },
   },
   extraReducers: (builder) => {

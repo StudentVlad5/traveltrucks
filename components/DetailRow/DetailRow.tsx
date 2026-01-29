@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export const DetailRow = ({
   label,
   value,
@@ -5,8 +7,16 @@ export const DetailRow = ({
   label: string;
   value: string;
 }) => (
-  <div className="flex justify-between font-medium">
+  <motion.div
+    key={label}
+    id={`camper-${label}`}
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 50 }}
+    transition={{ delay: 0.4, duration: 0.5 }}
+    className="flex justify-between font-medium"
+  >
     <span className="text-main">{label}</span>
     <span className="text-main capitalize">{value}</span>
-  </div>
+  </motion.div>
 );

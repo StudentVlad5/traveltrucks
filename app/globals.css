@@ -6,6 +6,15 @@
 }
 
 @theme {
+  --container-max-width: 1440px;
+
+  --container-padding: 16px;
+  --container-padding-sm: 16px;
+  --container-padding-md: 24px;
+  --container-padding-lg: 32px;
+  --container-padding-xl: 32px;
+  --container-padding-2xl: 32px;
+
   --text: #475467;
   --color-inputs: #f7f7f7;
   --color-badges: #f2f4f7;
@@ -83,4 +92,20 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #101d38;
+  color: #ffffff;
+  border-radius: 50%;
+}
+
+.react-datepicker__day--selected:hover {
+  background-color: #101d38;
 }

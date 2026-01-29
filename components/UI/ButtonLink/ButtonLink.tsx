@@ -23,7 +23,7 @@ export const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
     };
 
     const commonClasses = `
-      inline-flex justify-center items-center py-4 px-10 rounded-[200px]
+      inline-flex w-fit justify-center items-center py-4 px-10 rounded-[200px]
       text-base font-medium leading-[1.5] tracking-[-0.01em] transition-all duration-200 m-h-14;
       ${VARIANT_STYLES[variant]}
       ${disabled ? "opacity-50 cursor-not-allowed pointer-events-none" : ""}

@@ -170,8 +170,9 @@ export const Filters = ({
       </motion.div>
       {hasAnyFilters && (
         <Button
+          variant="secondary"
           onClick={handleReset}
-          className="w-[173px] py-4 text-gray-medium underline hover:text-accent-red transition-colors text-sm font-medium"
+          className="w-[173px] py-4"
         >
           Clear
         </Button>

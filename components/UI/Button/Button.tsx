@@ -29,15 +29,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     // Базові класи (ідентичні ButtonLink)
-    const commonClasses = `
-      inline-flex justify-center items-center py-4 px-10 rounded-[200px]
-      text-base font-medium leading-[1.5] tracking-[-0.01em] transition-all duration-200 min-h-14
-      cursor-pointer outline-none border
-      ${VARIANT_STYLES[variant]}
-      ${disabled || isLoading ? "opacity-50 cursor-not-allowed pointer-events-none" : ""}
-      ${className}
-    `;
-
+    const commonClasses = `inline-flex w-fit justify-center items-center py-4 px-10 rounded-[200px] text-base font-medium leading-[1.5] tracking-[-0.01em] transition-all duration-200 min-h-14 cursor-pointer outline-none border ${VARIANT_STYLES[variant]} ${disabled || isLoading ? "opacity-50 cursor-not-allowed pointer-events-none" : ""} ${className}`;
     return (
       <button
         type={type}

@@ -1,36 +1,52 @@
-"use client";
+import { Metadata } from "next";
+import { getCampers } from "@/helper/api/api";
+import Catalog from "@/components/CatalogPage/CatalogPage";
+import { Camper } from "@/types/truck";
 
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+export async function generateMetadata(): Promise<Metadata> {
+  const { total } = await getCampers();
 
-import { selectFilters } from "@/store/Filters/filtersSelectors";
-import { fetchVehicles } from "@/store/Vehicles/vehiclesThunks";
-import { clearVehicles } from "@/store/Vehicles/vehiclesSlice";
+  return {
+    title: `Catalog (${total}) | TravelTrucks`,
+    description:
+      "Find your perfect campervan. Explore our wide range of vehicles for any adventure.",
+    openGraph: {
+      title: `TravelTrucks Catalog - ${total} Vehicles Available`,
+      description: "Book your campervan today.",
+      type: "website",
+    },
+  };
+}
 
-import { Filters } from "@/components/Filter/Filters";
-import { CamperList } from "@/components/Vehicles/CamperList";
-import { countOfTruckCards } from "@/helper/CONST";
+export default async function CatalogPage() {
+  const { items } = await getCampers();
 
-export default function Catalog() {
-  const dispatch = useAppDispatch();
-
-  const filters = useAppSelector(selectFilters);
-  const [visibleCount, setVisibleCount] = useState<number>(countOfTruckCards);
-  useEffect(() => {
-    dispatch(clearVehicles());
-    dispatch(fetchVehicles());
-  }, [dispatch, filters]);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Campervan Rental Catalog",
+    itemListElement: items
+      .slice(0, 10)
+      .map((camper: Camper, index: number) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Product",
+          name: camper.name,
+          image: camper.gallery[0]?.original,
+          description: camper.description.substring(0, 100) + "...",
+          url: `https://yourdomain.com/catalog/${camper.id}`,
+        },
+      })),
+  };
 
   return (
-    <div className="container mx-auto px-4 md:px-16 py-10 flex flex-col lg:flex-row gap-16">
-      <Filters setVisibleCount={setVisibleCount} />
-
-      <section className="flex-1">
-        <CamperList
-          visibleCount={visibleCount}
-          setVisibleCount={setVisibleCount}
-        />
-      </section>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Catalog />
+    </>
   );
 }

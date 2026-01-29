@@ -21,22 +21,25 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
-
   return (
-    <nav className="w-full flex justify-center items-center p-4 bg-white shadow text-gray-700 fixed z-30 w-full mx-auto top-0">
-      {/* Логотип */}
+    <nav
+      className={`w-full flex justify-center items-center p-4 text-gray-700 fixed z-30 w-full mx-auto top-0 ${pathname.includes("catalog") ? "bg-inputs" : "bg-white"}`}
+    >
+      {/* logo */}
       <div className="container w-full px-4 md:px-16 flex justify-between items-center h-18">
         <Link href="/">
           <XLogo />
         </Link>
-        {/* Десктоп-меню */}
-        <div className="w-full lg:flex hidden lg:flex gap-4 justify-center items-center text-[16px] leading-[1.5] ">
+        {/* Desktop menu */}
+        <div
+          className={`w-full lg:flex hidden lg:flex gap-4 justify-center items-center text-[16px] leading-[1.5]`}
+        >
           {navMenu.map((item) => (
             <NavItem key={item.key} item={item} pathname={pathname} />
           ))}
         </div>
 
-        {/* Мобільне меню з анімацією */}
+        {/* Mobile menu*/}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div

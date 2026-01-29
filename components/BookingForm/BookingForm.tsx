@@ -9,6 +9,7 @@ import { TextareaInput } from "../UI/TextareaInput/TextareaInput";
 import { IBookingData } from "@/types/bookingData";
 import { STORAGE_KEY } from "@/helper/CONST";
 import { toast } from "react-hot-toast";
+import { Button } from "../UI/Button/Button";
 
 export const BookingForm = () => {
   const {
@@ -48,89 +49,102 @@ export const BookingForm = () => {
   const onSubmit = (data: IBookingData) => {
     console.log("Booking Data Submit:", data);
     toast.success("Booking successful!");
-
-    // Очищуємо форму та LocalStorage
     localStorage.removeItem(STORAGE_KEY);
     reset({ name: "", email: "", bookingDate: null, comment: "" });
   };
 
   return (
-    <div className="p-6 border border-gray-light rounded-2xl">
-      <h3 className="text-xl font-semibold mb-2 text-main">
+    <div className="px-[57px] py-[44px] border border-gray-light rounded-2xl">
+      <h3 className="text-[20px] leading-[1.2] font-semibold mb-[8px] text-main">
         Book your campervan now
       </h3>
-      <p className="text-gray-dark mb-6">
+      <p className="text-[16px] leading-[1.5] font-normal text-gray mb-6">
         Stay connected! We are always ready to help you.
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-        {/* Name */}
-        <div className="relative">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-[14px] w-full"
+      >
+        <div className="relative w-full">
+          {" "}
           <Input
             id="name"
             label=""
             placeholder="Name*"
+            autoComplete="name"
+            className={`w-full ${formData?.name ? "bg-white" : "bg-inputs"}`}
             {...register("name", { required: "Name is required" })}
           />
           {errors.name && (
-            <span className="text-accent-red text-xs">
+            <p className="absolute text-accent-red text-xs mt-[2px]">
               {errors.name.message}
-            </span>
+            </p>
           )}
         </div>
 
-        {/* Email */}
-        <div className="relative">
+        <div className="relative w-full">
+          {" "}
           <Input
             id="email"
             label=""
             type="email"
             placeholder="Email*"
+            autoComplete="email"
+            className={`w-full ${formData?.email ? "bg-white" : "bg-inputs"}`}
             {...register("email", {
               required: "Email is required",
               pattern: { value: /^\S+@\S+$/i, message: "Invalid email" },
             })}
           />
           {errors.email && (
-            <span className="text-accent-red text-xs">
+            <p className="absolute text-accent-red text-xs mt-[2px]">
               {errors.email.message}
-            </span>
+            </p>
           )}
         </div>
 
-        {/* Date Picker (через Controller, бо це сторонній компонент) */}
-        <div className="relative">
+        <div className="relative w-full">
+          {" "}
           <Controller
             control={control}
             name="bookingDate"
             rules={{ required: "Date is required" }}
             render={({ field }) => (
               <DatePicker
+                formatWeekDay={(nameOfDay) =>
+                  nameOfDay.toUpperCase().slice(0, 3)
+                }
                 selected={field.value}
                 onChange={(date: Date | null) => field.onChange(date)}
                 placeholderText="Booking date*"
                 minDate={new Date()}
-                className="w-full px-[18px] py-[18px] border-none rounded-xl bg-gray-ghost placeholder-gray-medium focus:outline-none"
+                autoComplete="off"
+                calendarStartDay={1}
+                className={`w-full px-[18px] py-[18px] border border-gray-300 rounded-xl placeholder-gray focus:outline-none focus:ring-1 focus:ring-gray-medium focus:border-gray-medium sm:text-sm transition-colors ${
+                  formData?.bookingDate ? "bg-white" : "bg-inputs"
+                }`}
               />
             )}
           />
           {errors.bookingDate && (
-            <span className="text-accent-red text-xs">
+            <p className="absolute text-accent-red text-xs mt-[2px]">
               {errors.bookingDate.message}
-            </span>
+            </p>
           )}
         </div>
 
-        {/* Comment */}
-        <TextareaInput placeholder="Comment" {...register("comment")} />
+        <TextareaInput
+          placeholder="Comment"
+          {...register("comment")}
+          className={`w-full ${formData?.comment ? "bg-white" : "bg-inputs"}`}
+        />
 
-        <button
-          type="submit"
-          className="mt-6 px-10 py-4 bg-accent-red text-white rounded-full font-medium 
-                     hover:bg-red-600 transition-colors self-center lg:self-start"
-        >
-          Send
-        </button>
+        <div className="mt-6 flex justify-center justify-center">
+          <Button type="submit" variant="primary">
+            Send
+          </Button>
+        </div>
       </form>
     </div>
   );

@@ -13,15 +13,19 @@ export const Rating = ({ camper, variant = "catalog" }: RatingProps) => {
   const isDetails = variant === "details";
 
   return (
-    <div className={isDetails ? "mb-8" : "mb-2 pr-8"}>
-      <h2
-        className={`font-semibold text-main truncate ${
-          isDetails ? "text-[32px] mb-2" : "text-lg md:text-2xl"
-        }`}
-      >
-        {camper?.name}
-      </h2>
-
+    <div className={isDetails ? "mb-[24px]" : "mb-[24px] pr-8"}>
+      <div className="flex flex-row justify-between">
+        <h2
+          className={`font-semibold text-main  mb-[8px] truncate ${
+            isDetails ? "text-[32px]" : "text-lg md:text-2xl"
+          }`}
+        >
+          {camper?.name}
+        </h2>
+        {!isDetails && (
+          <p className="text-2xl font-semibold">€{camper?.price.toFixed(0)}</p>
+        )}
+      </div>
       <div
         className={`flex items-center gap-4 text-main ${isDetails ? "text-base" : "text-sm md:text-base"}`}
       >

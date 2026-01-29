@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { getCampers } from "@/helper/api/api";
 import Catalog from "@/components/CatalogPage/CatalogPage";
 import { Camper } from "@/types/truck";
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { total } = await getCampers();
@@ -19,7 +20,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CatalogPage() {
-  const { items } = await getCampers();
+  const data = await getCampers({});
+
+  const items = data?.items || [];
+  const total = data?.total || 0;
 
   const jsonLd = {
     "@context": "https://schema.org",

@@ -3,11 +3,11 @@ import { BASE_URL } from "@/helper/CONST";
 export async function getCamperById(id) {
   try {
     const res = await fetch(`${BASE_URL}/${id}`, {
-      cache: "no-store",
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch camper ${id}`);
+      if (!res.ok) return { items: [], total: 0 };
     }
 
     return res.json();
@@ -21,7 +21,7 @@ export async function getCampers(params) {
     const url = params ? `${BASE_URL}?${params}` : BASE_URL;
 
     const res = await fetch(url, {
-      cache: "no-store",
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {

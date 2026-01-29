@@ -6,6 +6,10 @@
 }
 
 @theme {
+  --text: #475467;
+  --color-inputs: #f7f7f7;
+  --color-badges: #f2f4f7;
+
   /* Основні кольори */
   --color-main: #101828;
   --color-white: #ffffff;

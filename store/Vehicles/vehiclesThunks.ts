@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../index";
-import { BASE_URL } from "@/assets/CONST";
+import { BASE_URL } from "@/helper/CONST";
 import axios, { AxiosError } from "axios";
 import { Camper } from "@/types/truck";
 

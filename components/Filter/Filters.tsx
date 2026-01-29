@@ -11,10 +11,10 @@ import {
   countOfTruckCards,
   EQUIPMENT_FILTER,
   TYPE_FILTER,
-} from "@/assets/CONST";
+} from "@/helper/CONST";
 import { FilterCard } from "./FilterCard";
 import { Button } from "../UI/Button/Button";
-import MapIcon from "@/assets/icons/default_map.svg";
+import MapIcon from "@/helper/icons/default_map.svg";
 import { BooleanFilterKeys, FiltersState, VehicleType } from "@/types/filters";
 import Image from "next/image";
 import { motion } from "framer-motion";

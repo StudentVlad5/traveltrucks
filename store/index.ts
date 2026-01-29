@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import vehiclesReducer from "./Vehicles/vehiclesSlice";
+import camperReducer from "./Camper/camperSlice";
 import filtersReducer from "./Filters/filtersSlice";
 import favoritesReducer from "./Favorites/favoritesSlice";
 
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   vehicles: vehiclesReducer,
   filters: filtersReducer,
   favorites: favoritesReducer,
+  camper: camperReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

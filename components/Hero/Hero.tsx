@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import hero_img from "@/assets/images/hero.webp";
+import hero_img from "@/helper/images/hero.webp";
 import { ButtonLink } from "../UI/ButtonLink/ButtonLink";
 
 export const Hero: React.FC = () => {

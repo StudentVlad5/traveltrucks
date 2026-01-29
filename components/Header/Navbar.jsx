@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { navMenu } from "@/assets/CONST";
+import { navMenu } from "@/helper/CONST";
 import { useState, useEffect } from "react";
 import { MenuIcon, XIcon, XLogo } from "../UI/Icons/icons";
 import { NavItem } from "../UI/NavItem/NavItem";

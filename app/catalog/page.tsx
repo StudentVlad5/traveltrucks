@@ -9,7 +9,7 @@ import { clearVehicles } from "@/store/Vehicles/vehiclesSlice";
 
 import { Filters } from "@/components/Filter/Filters";
 import { CamperList } from "@/components/Vehicles/CamperList";
-import { countOfTruckCards } from "@/assets/CONST";
+import { countOfTruckCards } from "@/helper/CONST";
 
 export default function Catalog() {
   const dispatch = useAppDispatch();

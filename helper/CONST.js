@@ -1,7 +1,8 @@
 export const BASE_URL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers";
+export const SEO_URL = "https://traveltrucks-sepia.vercel.app";
 
 //  menu
-export const navMenu = [
+export const NAVMENU = [
   { key: "Home", path: "/" },
   { key: "Catalog", path: "catalog" },
 ];
@@ -38,7 +39,7 @@ export const TYPE_FILTER = [
 ];
 
 // catalog
-export const countOfTruckCards = 4;
+export const COUNT_OF_TRUCKS_CARD = 4;
 
 // bages
 export const CAMPER_FEATURES_CONFIG = [

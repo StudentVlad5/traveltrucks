@@ -8,7 +8,6 @@ export default function NotFound() {
   const router = useRouter();
 
   useEffect(() => {
-    // Автоматичний редірект через 5 секунд
     const timer = setTimeout(() => {
       router.push("/catalog");
     }, 5000);

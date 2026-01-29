@@ -8,7 +8,7 @@ import {
 } from "@/store/Filters/filtersSlice";
 import { fetchVehicles } from "@/store/Vehicles/vehiclesThunks";
 import {
-  countOfTruckCards,
+  COUNT_OF_TRUCKS_CARD,
   EQUIPMENT_FILTER,
   TYPE_FILTER,
 } from "@/helper/CONST";
@@ -64,7 +64,7 @@ export const Filters = ({
     dispatch(setAllFilters(draftFilters));
     dispatch(fetchVehicles());
     setTrigger((prev) => !prev);
-    setVisibleCount(countOfTruckCards);
+    setVisibleCount(COUNT_OF_TRUCKS_CARD);
   };
 
   const handleReset = () => {
@@ -72,7 +72,7 @@ export const Filters = ({
     setDraftFilters(initialState);
     dispatch(fetchVehicles());
     setTrigger((prev) => !prev);
-    setVisibleCount(countOfTruckCards);
+    setVisibleCount(COUNT_OF_TRUCKS_CARD);
   };
 
   const isDirty = useMemo(
@@ -112,7 +112,6 @@ export const Filters = ({
       <div className="flex flex-col gap-6">
         <p className="text-gray-dark font-medium">Filters</p>
 
-        {/* Vehicle Equipment */}
         <div>
           <h3 className="h2-title mb-6 border-b border-gray-light pb-6 text-xl">
             Vehicle equipment
@@ -134,7 +133,6 @@ export const Filters = ({
           </div>
         </div>
 
-        {/* Vehicle Type */}
         <div>
           <h3 className="h2-title mb-6 border-b border-gray-light pb-6 text-xl">
             Vehicle type

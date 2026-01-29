@@ -2,37 +2,33 @@
 import { MetadataRoute } from "next";
 import { getCampers } from "@/helper/api/api";
 import { Camper } from "@/types/truck";
+import { SEO_URL } from "@/helper/CONST";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://your-camper-rent.com"; // Замініть на ваш домен
-
-  // 1. Отримуємо всі кемпери з API для створення посилань
   let campers: Camper[] = [];
   try {
-    const res = await getCampers(); // Припустимо, повертає масив або об'єкт з даними
+    const res = await getCampers();
     campers = res.items || res;
   } catch (error) {
     console.error("Sitemap: Failed to fetch campers", error);
   }
 
-  // 2. Створюємо записи для кожного кемпера
   const camperEntries = campers.map((camper) => ({
-    url: `${baseUrl}/catalog/${camper.id}`,
+    url: `${SEO_URL}/catalog/${camper.id}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
 
-  // 3. Статичні сторінки
   return [
     {
-      url: baseUrl,
+      url: SEO_URL,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 1,
     },
     {
-      url: `${baseUrl}/catalog`,
+      url: `${SEO_URL}/catalog`,
       lastModified: new Date(),
       changeFrequency: "daily" as const,
       priority: 0.9,

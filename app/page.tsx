@@ -1,4 +1,5 @@
 import { Hero } from "@/components/Hero/Hero";
+import { SEO_URL } from "@/helper/CONST";
 
 import { Metadata } from "next";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TravelTrucks | Campervan Rental",
     description: "Rent affordable and comfortable campervans.",
-    images: [{ url: "/og-main.jpg" }],
+    images: [{ url: "/hero.webp" }],
     type: "website",
   },
 };
@@ -19,10 +20,10 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "TravelTrucks",
-    url: "https://your-domain.com",
+    url: SEO_URL,
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://your-domain.com/catalog?search={search_term_string}",
+      target: `${SEO_URL}/catalog?search={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };
@@ -33,7 +34,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      return <Hero />;
+      <Hero />;
     </>
   );
 }

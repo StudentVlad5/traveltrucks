@@ -50,11 +50,7 @@ export default function CamperLayout({
 
   return (
     <div className="container mx-auto pt-[48px] pb-[80px]">
-      {/* 1. Header: Назва, Рейтинг, Локація */}
-
       {camper && <Rating camper={camper} variant="details" />}
-
-      {/* 2. Gallery */}
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 ${camper?.gallery?.length > 3 ? "md:grid-cols-4" : "md:grid-cols-3"} gap-4 mb-10`}
       >
@@ -64,6 +60,7 @@ export default function CamperLayout({
             className="relative h-[310px] rounded-xl overflow-hidden shadow-sm"
           >
             <Image
+              loading="eager"
               src={img?.original}
               alt={`${camper?.name} photo ${index + 1}`}
               fill
@@ -74,15 +71,12 @@ export default function CamperLayout({
         ))}
       </div>
 
-      {/* 3. Description */}
       <p className="text-gray-dark text-lg leading-[1.5] mb-10 max-w-[1232px]">
         {camper?.description}
       </p>
 
-      {/* 4. Tabs & Details Section */}
       <div className="flex flex-col">
         <div className="flex-1 ">
-          {/* Тут будуть таби Features / Reviews */}
           <div className="border-b border-gray-soft mb-[56px] flex gap-10">
             <Link
               href={`/catalog/${id}`}

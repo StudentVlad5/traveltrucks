@@ -8,13 +8,14 @@ import { fetchVehicles } from "@/store/Vehicles/vehiclesThunks";
 import { clearVehicles } from "@/store/Vehicles/vehiclesSlice";
 import { Filters } from "@/components/Filter/Filters";
 import { CamperList } from "@/components/Vehicles/CamperList";
-import { countOfTruckCards } from "@/helper/CONST";
+import { COUNT_OF_TRUCKS_CARD } from "@/helper/CONST";
 
 export default function Catalog() {
   const dispatch = useAppDispatch();
 
   const filters = useAppSelector(selectFilters);
-  const [visibleCount, setVisibleCount] = useState<number>(countOfTruckCards);
+  const [visibleCount, setVisibleCount] =
+    useState<number>(COUNT_OF_TRUCKS_CARD);
   useEffect(() => {
     dispatch(clearVehicles());
     dispatch(fetchVehicles());

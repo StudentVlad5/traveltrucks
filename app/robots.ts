@@ -1,8 +1,7 @@
+import { SEO_URL } from "@/helper/CONST";
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://your-camper-rent.com";
-
   return {
     rules: {
       userAgent: "*",
@@ -12,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
         "/_next/", // Не індексувати службові файли Next.js
       ],
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${SEO_URL}/sitemap.xml`,
   };
 }

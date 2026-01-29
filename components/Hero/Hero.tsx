@@ -6,7 +6,6 @@ import { ButtonLink } from "../UI/ButtonLink/ButtonLink";
 export const Hero: React.FC = () => {
   return (
     <section className="relative w-full h-[90vh] md:h-[696px] flex justify-center items-center overflow-hidden">
-      {/* Оптимізація Image */}
       <Image
         src={hero_img}
         alt="Camp of the trucks hero"

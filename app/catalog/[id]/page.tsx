@@ -8,9 +8,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  console.log("id", id);
   const camper = await getCamperById(id);
-
   if (!camper) return { title: "Camper not found" };
 
   return {

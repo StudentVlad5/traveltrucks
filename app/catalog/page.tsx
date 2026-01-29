@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { getCampers } from "@/helper/api/api";
 import Catalog from "@/components/CatalogPage/CatalogPage";
 import { Camper } from "@/types/truck";
+import { SEO_URL } from "@/helper/CONST";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,9 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function CatalogPage() {
   const data = await getCampers({});
-
   const items = data?.items || [];
-  const total = data?.total || 0;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -39,7 +38,7 @@ export default async function CatalogPage() {
           name: camper.name,
           image: camper.gallery[0]?.original,
           description: camper.description.substring(0, 100) + "...",
-          url: `https://yourdomain.com/catalog/${camper.id}`,
+          url: `${SEO_URL}/catalog/${camper.id}`,
         },
       })),
   };

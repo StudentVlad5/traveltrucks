@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { navMenu } from "@/helper/CONST";
+import { NAVMENU } from "@/helper/CONST";
 import { useState, useEffect } from "react";
 import { MenuIcon, XIcon, XLogo } from "../UI/Icons/icons";
 import { NavItem } from "../UI/NavItem/NavItem";
@@ -25,21 +25,18 @@ export default function Navbar() {
     <nav
       className={`w-full flex justify-center items-center p-4 text-gray-700 fixed z-30 w-full mx-auto top-0 ${pathname.includes("catalog") ? "bg-inputs" : "bg-white"}`}
     >
-      {/* logo */}
       <div className="container w-full px-4 md:px-16 flex justify-between items-center h-18">
         <Link href="/">
           <XLogo />
         </Link>
-        {/* Desktop menu */}
         <div
           className={`w-full lg:flex hidden lg:flex gap-4 justify-center items-center text-[16px] leading-[1.5]`}
         >
-          {navMenu.map((item) => (
+          {NAVMENU.map((item) => (
             <NavItem key={item.key} item={item} pathname={pathname} />
           ))}
         </div>
 
-        {/* Mobile menu*/}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -49,7 +46,7 @@ export default function Navbar() {
               transition={{ duration: 0.3 }}
               className="lg:hidden fixed inset-0 bg-white/95 shadow-lg z-40 flex flex-col items-center justify-center gap-6 p-6"
             >
-              {navMenu.map((item) => (
+              {NAVMENU.map((item) => (
                 <NavItem
                   key={item.key}
                   item={item}

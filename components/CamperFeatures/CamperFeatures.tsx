@@ -1,11 +1,7 @@
 import { Camper } from "@/types/truck";
 import { Badge } from "../UI/Badge/Badge";
 import { CAMPER_FEATURES_CONFIG } from "@/helper/CONST";
-
-interface CamperFeaturesProps {
-  camper: Camper;
-  className?: string;
-}
+import { CamperFeaturesProps } from "@/types/CamperFeaturesProps";
 
 export const CamperFeatures = ({
   camper,

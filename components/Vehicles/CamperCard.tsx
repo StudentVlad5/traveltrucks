@@ -20,13 +20,13 @@ export const CamperCard = ({ camper }: { camper: Camper }) => {
 
   return (
     <div className="flex flex-col md:flex-row gap-4 md:gap-6 p-4 md:p-6 border border-gray-light rounded-2xl bg-white">
-      {/* Фото */}
       <div className="relative w-full md:w-[290px] h-[200px] md:h-[310px] shrink-0 overflow-hidden rounded-xl">
         <Image
           src={camper.gallery[0].thumb}
           alt={camper.name}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, 290px"
         />
       </div>
 

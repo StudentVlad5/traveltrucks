@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getCamperById } from "@/helper/api/api";
-import Script from "next/script";
 import Features from "@/components/Features/Features";
 import { SEO_URL } from "@/helper/CONST";
 
@@ -64,10 +63,8 @@ export default async function CamperDetailPage(props: Props) {
 
   return (
     <>
-      <Script
-        id="camper-jsonld"
+      <script
         type="application/ld+json"
-        strategy="lazyOnload"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Features initialData={camper} />

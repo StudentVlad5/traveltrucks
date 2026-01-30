@@ -4,7 +4,6 @@ import Catalog from "@/components/CatalogPage/CatalogPage";
 import { Camper } from "@/types/truck";
 import { SEO_URL } from "@/helper/CONST";
 export const dynamic = "force-dynamic";
-import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { total } = await getCampers();
@@ -46,10 +45,8 @@ export default async function CatalogPage() {
 
   return (
     <>
-      <Script
-        id="catalog-jsonld"
+      <script
         type="application/ld+json"
-        strategy="lazyOnload"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Catalog />

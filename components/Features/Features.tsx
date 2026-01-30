@@ -11,13 +11,13 @@ import { DetailRow } from "@/components/DetailRow/DetailRow";
 import { motion } from "framer-motion";
 import FeaturesSkeleton from "@/components/Skeletons/FeaturesSkeleton";
 
-export default function Features({ initialData }: { initialData: Camper }) {
-  let camper = useAppSelector(selectCurrentItem);
+export default function Features() {
+  const camper = useAppSelector(selectCurrentItem);
   const isLoading = useAppSelector(selectCamperLoading);
   if (isLoading) {
     return <FeaturesSkeleton />;
   }
-  if (!camper) camper = initialData;
+  if (!camper) return null;
 
   return (
     <motion.div

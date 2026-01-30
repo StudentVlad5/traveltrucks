@@ -6,41 +6,14 @@ import { SEO_URL } from "@/helper/CONST";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }): Promise<Metadata> {
-  const { id } = await params;
+  const { id } = params;
   const camper = await getCamperById(id);
 
-  if (!camper) return { title: "Camper not found" };
-
-  return {
-    title: `${camper.name} | TravelTrucks`,
-    description: camper.description.substring(0, 160),
-    metadataBase: new URL(SEO_URL),
-    openGraph: {
-      title: `${camper.name} | Rent for $${camper.price}`,
-      description: camper.description.substring(0, 160),
-      images: [
-        {
-          url: camper.gallery[0]?.original || "/hero.webp",
-          width: 1200,
-          height: 630,
-        },
-      ],
-      type: "website",
-    },
-  };
-}
-
-type Props = {
-  params: Promise<{ id: string }>;
-};
-
-export default async function CamperDetailPage(props: Props) {
-  const { id } = await props.params;
-  const camper = await getCamperById(id);
-
-  if (!camper) return null;
+  if (!camper) {
+    return { title: "Camper not found" };
+  }
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -61,13 +34,30 @@ export default async function CamperDetailPage(props: Props) {
     },
   };
 
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <Features initialData={camper} />
-    </>
-  );
+  return {
+    title: `${camper.name} | TravelTrucks`,
+    description: camper.description.substring(0, 160),
+    metadataBase: new URL(SEO_URL),
+
+    openGraph: {
+      title: `${camper.name} | Rent for $${camper.price}`,
+      description: camper.description.substring(0, 160),
+      images: [
+        {
+          url: camper.gallery[0]?.original || "/hero.webp",
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: "website",
+    },
+
+    other: {
+      "application/ld+json": JSON.stringify(jsonLd),
+    },
+  };
+}
+
+export default async function CamperDetailPage() {
+  return <Features />;
 }

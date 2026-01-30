@@ -22,3 +22,7 @@ export type BooleanFilterKeys = keyof Pick<
   FiltersState,
   "AC" | "bathroom" | "kitchen" | "TV"
 >;
+export type ValueFilterKeys = keyof Pick<
+  FiltersState,
+  "transmission" | "location"
+>;

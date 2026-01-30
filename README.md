@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TravelTrucks - Camper Rental Service
 
-## Getting Started
+**TravelTrucks** is a modern web application designed for discovering and booking camper vans. It provides a seamless user experience for travelers to browse a fleet of vehicles, apply advanced filters, and manage their favorite campers.
 
-First, run the development server:
+## Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Vehicle Catalog**: Browse a wide list of available campers with an efficient "Load More" pagination system.
+- **Advanced Filtering**:
+  - Search by location.
+  - Filter by vehicle type: _Van, Fully Integrated,_ or _Alcove_.
+  - Filter by equipment: _AC, TV, Kitchen, Bathroom, etc._
+- **URL State Management**: All filters are synchronized with URL search parameters. This allows users to refresh the page, use navigation buttons (back/forward), or share links without losing their search criteria.
+- **Detailed Camper Pages**: View high-resolution galleries, detailed descriptions, vehicle specifications, and genuine user reviews.
+- **Booking System**: Integrated booking form with client-side validation and date selection.
+- **Favorites**: Save preferred campers to a dedicated list, persisted across browser sessions via Redux Persist.
+- **UX/UI Optimizations**: Smooth scrolling, automatic scroll-to-top on route changes, and interactive motion components.
+
+## Tech Stack
+
+- **Framework**: [Next.js 14+](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/) + [Redux Persist](https://github.com/rt2zz/redux-persist)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **HTTP Client**: [Axios](https://axios-http.com/)
+
+## Installation & Setup
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone [https://github.com/StudentVlad5/traveltrucks](https://github.com/StudentVlad5/traveltrucks)
+    cd traveltrucks
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+```text
+├── app/                 # Next.js App Router (pages, layouts, and sub-routes)
+├── components/          # Reusable UI components (Filters, Forms, UI Elements)
+├── store/               # Redux store configuration, slices, and async thunks
+├── types/               # TypeScript interfaces and type definitions
+├── helper/              # Constants, utility functions, and SVG icons
+└── public/              # Static assets (images, fonts)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technical Highlights
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+URL Synchronization Logic: Implemented a "Single Source of Truth" pattern where the URL parameters drive the application state. Used useSearchParams combined with useMemo to ensure the UI stays in sync with the URL without causing redundant renders.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Performance Optimization: Avoided "Cascading Renders" by using lazy state initialization and careful effect management, ensuring smooth state transitions even with complex filter combinations.
 
-## Learn More
+Persistence: Leveraged Redux Persist to keep user favorites and application settings safe between page reloads.
 
-To learn more about Next.js, take a look at the following resources:
+Clean Code & Architecture: Followed a modular approach with separate layers for business logic (Thunks), state management (Slices), and UI (Functional Components).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎯 MVP Implementation & Scalability
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is currently implemented as a **High-Performance MVP (Minimum Viable Product)**. The architecture is designed with **scalability in mind**, allowing for rapid integration of complex features without structural refactoring.
 
-## Deploy on Vercel
+### Current State:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Core booking flow and filtering system are fully functional.
+- Optimized state management ensures fast response times.
+- Modular component structure allows for easy UI updates.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Roadmap & Future Scaling:
+
+The project is ready for the next phase of development, with the following features prioritized for implementation:
+
+- **Internationalization (i18n)**: Integration of `next-intl` or `react-i18next` for multi-language support (English, German, Ukrainian, etc.).
+- **Dynamic Theming**: Support for Dark/Light modes using `next-themes` and Tailwind CSS variables.
+- **Advanced Availability Search**: Date-range picker for campers, allowing users to check real-time availability for specific travel periods.
+- **User Authentication**: Secure registration and login system via `NextAuth.js` or `Clerk` to manage personal bookings and profile settings.
+- **Payment Gateway Integration**: Secure online payments using `Stripe` or `PayPal` for instant camper reservations.
+- **Admin Dashboard**: A dedicated interface for van owners to manage their fleet, update descriptions, and track booking statistics.
+
+This scalable foundation ensures that **TravelTrucks** can grow from a simple search tool into a full-scale rental marketplace.
+
+# License
+
+This project was developed for educational purposes as part of a portfolio. Feel free to use it as a reference.

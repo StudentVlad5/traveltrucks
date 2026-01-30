@@ -1,6 +1,5 @@
 import { Hero } from "@/components/Hero/Hero";
 import { SEO_URL } from "@/helper/CONST";
-
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

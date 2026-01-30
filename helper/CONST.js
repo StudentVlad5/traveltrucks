@@ -38,6 +38,11 @@ export const TYPE_FILTER = [
   { id: "alcove", label: "Alcove", icon: GridAlcoveIcon },
 ];
 
+export const LOGIC_FILTER = {
+  booleanParams: ["AC", "bathroom", "kitchen", "TV"],
+  valueParams: ["transmission", "location"],
+};
+
 // catalog
 export const COUNT_OF_TRUCKS_CARD = 4;
 

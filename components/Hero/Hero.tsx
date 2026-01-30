@@ -2,8 +2,18 @@
 import Image from "next/image";
 import hero_img from "@/helper/images/hero.webp";
 import { ButtonLink } from "../UI/ButtonLink/ButtonLink";
+import { useEffect } from "react";
 
 export const Hero: React.FC = () => {
+  useEffect(
+    () =>
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      }),
+    [],
+  );
+
   return (
     <section className="relative w-full h-[90vh] md:h-[696px] flex justify-center items-center overflow-hidden">
       <Image

@@ -98,7 +98,7 @@ export const BookingForm = () => {
             })}
           />
           {errors.email && (
-            <p className="absolute text-accent-red text-xs mt-[2px]">
+            <p className="absolute text-accent-red text-xs mt-[1px]">
               {errors.email.message}
             </p>
           )}
@@ -128,7 +128,7 @@ export const BookingForm = () => {
             )}
           />
           {errors.bookingDate && (
-            <p className="absolute text-accent-red text-xs mt-[2px]">
+            <p className="absolute text-accent-red text-xs mt-[1px]">
               {errors.bookingDate.message}
             </p>
           )}

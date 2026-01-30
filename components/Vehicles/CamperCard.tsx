@@ -25,6 +25,7 @@ export const CamperCard = ({ camper }: { camper: Camper }) => {
           src={camper.gallery[0].thumb}
           alt={camper.name}
           fill
+          loading="eager"
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 290px"
         />

@@ -7,7 +7,7 @@
 - **Vehicle Catalog**: Browse a wide list of available campers with an efficient "Load More" pagination system.
 - **Advanced Filtering**:
   - Search by location.
-  - Filter by vehicle type: _Van, Fully Integrated,_ or _Alcove_.
+  - Filter by vehicle type: _Panel Truck, Fully Integrated,_ or _Alcove_.
   - Filter by equipment: _AC, TV, Kitchen, Bathroom, etc._
 - **URL State Management**: All filters are synchronized with URL search parameters. This allows users to refresh the page, use navigation buttons (back/forward), or share links without losing their search criteria.
 - **Detailed Camper Pages**: View high-resolution galleries, detailed descriptions, vehicle specifications, and genuine user reviews.

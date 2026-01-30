@@ -33,7 +33,7 @@ export const EQUIPMENT_FILTER = [
 ];
 
 export const TYPE_FILTER = [
-  { id: "panelTruck", label: "panelTruck", icon: GridVanIcon },
+  { id: "panelTruck", label: "PanelTruck", icon: GridVanIcon },
   { id: "fullyIntegrated", label: "Fully Integrated", icon: GridFullyIcon },
   { id: "alcove", label: "Alcove", icon: GridAlcoveIcon },
 ];

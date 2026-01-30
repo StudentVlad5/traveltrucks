@@ -1,4 +1,4 @@
-export type VehicleType = "van" | "fully_integrated" | "alcove";
+export type VehicleType = "panelTruck" | "fully_integrated" | "alcove";
 
 export interface FiltersState {
   location: string;

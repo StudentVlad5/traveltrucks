@@ -1,15 +1,22 @@
 "use client";
-import { selectCurrentItem } from "@/store/Camper/camperSelectors";
+import {
+  selectCamperLoading,
+  selectCurrentItem,
+} from "@/store/Camper/camperSelectors";
 import { useAppSelector } from "@/store/hooks";
 import { CamperFeatures } from "@/components/CamperFeatures/CamperFeatures";
 import { VEHICLE_DETAILS_CONFIG } from "@/helper/CONST";
 import { Camper } from "@/types/truck";
 import { DetailRow } from "@/components/DetailRow/DetailRow";
 import { motion } from "framer-motion";
+import FeaturesSkeleton from "@/components/Skeletons/FeaturesSkeleton";
 
-export default function FeaturesPage({ initialData }: { initialData: Camper }) {
+export default function Features({ initialData }: { initialData: Camper }) {
   let camper = useAppSelector(selectCurrentItem);
-
+  const isLoading = useAppSelector(selectCamperLoading);
+  if (isLoading) {
+    return <FeaturesSkeleton />;
+  }
   if (!camper) camper = initialData;
 
   return (

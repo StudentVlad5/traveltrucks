@@ -7,7 +7,6 @@ import {
   setAllFilters,
   initialState,
 } from "@/store/Filters/filtersSlice";
-import { fetchVehicles } from "@/store/Vehicles/vehiclesThunks";
 import {
   COUNT_OF_TRUCKS_CARD,
   EQUIPMENT_FILTER,
@@ -68,7 +67,6 @@ export const Filters = ({
     ) {
       dispatch(setAllFilters(currentFiltersFromUrl));
     }
-    dispatch(fetchVehicles());
   }, [currentFiltersFromUrl, dispatch, reduxFilters]);
 
   const handleEquipmentChange = (id: string) => {

@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { BookingForm } from "@/components/BookingForm/BookingForm";
 import { clearCamper } from "@/store/Camper/camperSlice";
 import { useRouter } from "next/navigation";
+import { CamperDetailsSkeleton } from "@/components/Skeletons/CamperDetailsSkeleton";
 
 export default function CamperLayout({
   children,
@@ -45,7 +46,7 @@ export default function CamperLayout({
   if (error)
     return <div className="pt-24 container mx-auto text-red-500">{error}</div>;
   if (isLoading || !camper) {
-    return null;
+    return <CamperDetailsSkeleton />;
   }
 
   return (

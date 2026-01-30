@@ -1,4 +1,4 @@
-export default function CatalogLoading() {
+export default function CatalogSkeleton() {
   return (
     <div className="container mx-auto pt-[48px] pb-[80px]">
       <div className="flex flex-col gap-6">

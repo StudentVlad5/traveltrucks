@@ -112,6 +112,8 @@ export const BookingForm = () => {
             rules={{ required: "Date is required" }}
             render={({ field }) => (
               <DatePicker
+                id="bookingDate"
+                name="bookingDate"
                 formatWeekDay={(nameOfDay) =>
                   nameOfDay.toUpperCase().slice(0, 3)
                 }

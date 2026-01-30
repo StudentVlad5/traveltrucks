@@ -1,6 +1,7 @@
 import { Hero } from "@/components/Hero/Hero";
 import { SEO_URL } from "@/helper/CONST";
 import { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "TravelTrucks | Rent the best campervans in Ukraine",
@@ -29,8 +30,10 @@ export default function Home() {
 
   return (
     <>
-      <script
+      <Script
+        id="home-jsonld"
         type="application/ld+json"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />;

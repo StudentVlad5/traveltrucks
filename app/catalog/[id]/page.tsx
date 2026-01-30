@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getCamperById } from "@/helper/api/api";
-import FeaturesPage from "@/components/FeaturesPage/FeaturesPage";
+import Script from "next/script";
+import Features from "@/components/Features/Features";
 
 export async function generateMetadata({
   params,
@@ -50,11 +51,13 @@ export default async function CamperDetailPage(props: Props) {
 
   return (
     <>
-      <script
+      <Script
+        id="camper-jsonld"
         type="application/ld+json"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <FeaturesPage initialData={camper} />
+      <Features initialData={camper} />
     </>
   );
 }

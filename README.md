@@ -29,8 +29,8 @@
 1.  **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/StudentVlad5/traveltrucks](https://github.com/StudentVlad5/traveltrucks)
-    cd traveltrucks
+    (https://github.com/StudentVlad5/traveltrucks)
+
     ```
 
 2.  **Install dependencies:**
@@ -66,7 +66,7 @@ Persistence: Leveraged Redux Persist to keep user favorites and application sett
 
 Clean Code & Architecture: Followed a modular approach with separate layers for business logic (Thunks), state management (Slices), and UI (Functional Components).
 
-## 🎯 MVP Implementation & Scalability
+## MVP Implementation & Scalability
 
 This project is currently implemented as a **High-Performance MVP (Minimum Viable Product)**. The architecture is designed with **scalability in mind**, allowing for rapid integration of complex features without structural refactoring.
 

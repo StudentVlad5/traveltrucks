@@ -49,7 +49,7 @@ export default async function CatalogPage() {
       <Script
         id="catalog-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Catalog />

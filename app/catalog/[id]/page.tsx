@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { getCamperById } from "@/helper/api/api";
 import Script from "next/script";
 import Features from "@/components/Features/Features";
+import { SEO_URL } from "@/helper/CONST";
 
 export async function generateMetadata({
   params,
@@ -10,16 +11,28 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const camper = await getCamperById(id);
+
   if (!camper) return { title: "Camper not found" };
 
   return {
-    title: `${camper.name} | Rent for $${camper.price}`,
+    title: `${camper.name} | TravelTrucks`,
     description: camper.description.substring(0, 160),
+    metadataBase: new URL(SEO_URL),
     openGraph: {
-      images: [camper.gallery[0]?.original],
+      title: `${camper.name} | Rent for $${camper.price}`,
+      description: camper.description.substring(0, 160),
+      images: [
+        {
+          url: camper.gallery[0]?.original || "/hero.webp",
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: "website",
     },
   };
 }
+
 type Props = {
   params: Promise<{ id: string }>;
 };
@@ -54,7 +67,7 @@ export default async function CamperDetailPage(props: Props) {
       <Script
         id="camper-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Features initialData={camper} />

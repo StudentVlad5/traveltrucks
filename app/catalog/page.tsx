@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CatalogPage() {
-  const data = await getCampers({});
+  const data = await getCampers();
   const items = data?.items || [];
 
   const jsonLd = {
@@ -46,6 +46,7 @@ export default async function CatalogPage() {
   return (
     <>
       <script
+        id="catalog-jsonld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />

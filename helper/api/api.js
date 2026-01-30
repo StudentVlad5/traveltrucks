@@ -16,11 +16,9 @@ export async function getCamperById(id) {
   }
 }
 
-export async function getCampers(params) {
+export async function getCampers() {
   try {
-    const url = params ? `${BASE_URL}?${params}` : BASE_URL;
-
-    const res = await fetch(url, {
+    const res = await fetch(BASE_URL, {
       next: { revalidate: 3600 },
     });
 

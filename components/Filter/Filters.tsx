@@ -209,7 +209,7 @@ export const Filters = ({
         <Button
           variant="secondary"
           onClick={handleReset}
-          className="w-[173px] py-4"
+          className="min-w-[136px] py-4"
         >
           Clear
         </Button>

@@ -10,15 +10,24 @@ import { Camper } from "@/types/truck";
 import { DetailRow } from "@/components/DetailRow/DetailRow";
 import { motion } from "framer-motion";
 import FeaturesSkeleton from "@/components/Skeletons/FeaturesSkeleton";
+import { useEffect, useState } from "react";
 
 export default function Features({ initialData }: { initialData: Camper }) {
   let camper = useAppSelector(selectCurrentItem);
-  const isLoading = useAppSelector(selectCamperLoading);
+  if (!camper) camper = initialData;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   if (isLoading) {
     return <FeaturesSkeleton />;
   }
-  if (!camper) camper = initialData;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}

@@ -31,7 +31,7 @@ export default function CamperLayout({
     if (id) {
       dispatch(clearCamper());
       dispatch(fetchCamper(id as string));
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
     return () => {
       dispatch(clearCamper());

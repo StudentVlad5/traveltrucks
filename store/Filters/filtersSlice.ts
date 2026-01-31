@@ -9,6 +9,11 @@ export const initialState: FiltersState = {
   bathroom: false,
   kitchen: false,
   TV: false,
+  radio: false,
+  refrigerator: false,
+  microwave: false,
+  gas: false,
+  water: false,
 };
 
 const filtersSlice = createSlice({

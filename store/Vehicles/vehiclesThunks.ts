@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../index";
-import { BASE_URL } from "@/helper/CONST";
+import { BASE_URL, LOGIC_FILTER } from "@/helper/CONST";
 import axios, { AxiosError } from "axios";
 import { Camper } from "@/types/truck";
 
@@ -16,7 +16,7 @@ export const fetchVehicles = createAsyncThunk<
   if (filters.form) params.append("form", filters.form);
   if (filters.transmission) params.append("transmission", filters.transmission);
 
-  ["AC", "bathroom", "kitchen", "TV"].forEach((key) => {
+  LOGIC_FILTER.booleanParams.forEach((key) => {
     if (filters[key]) params.append(key, "true");
   });
 

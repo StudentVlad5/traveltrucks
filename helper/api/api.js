@@ -1,31 +1,37 @@
 import { BASE_URL } from "@/helper/CONST";
+import { cache } from "react";
 
-export async function getCamperById(id) {
+export const getCamperById = cache(async (id) => {
   try {
     const res = await fetch(`${BASE_URL}/${id}`, {
       next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
-      if (!res.ok) return { items: [], total: 0 };
+      if (res.status === 404) return null;
+      return { total: 0, items: [] };
     }
 
     return res.json();
   } catch (error) {
-    console.log(error);
+    console.error(`Error fetching camper ${id}:`, error);
+    return null;
   }
-}
+});
 
-export async function getCampers() {
+export const getCampers = cache(async (searchParams) => {
   try {
-    const res = await fetch(BASE_URL, {
+    const cleanParams = { ...searchParams };
+
+    const params = new URLSearchParams(cleanParams);
+    const res = await fetch(`${BASE_URL}?${params.toString()}`, {
       next: { revalidate: 3600 },
     });
-    if (!res.ok) {
-      throw new Error("Failed to fetch campers");
-    }
+    if (!res.ok) return { total: 0, items: [] };
+
     return res.json();
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching campers:", error);
+    return { items: [], total: 0 };
   }
-}
+});

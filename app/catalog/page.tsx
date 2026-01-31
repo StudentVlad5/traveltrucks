@@ -5,8 +5,13 @@ import { Camper } from "@/types/truck";
 import { SEO_URL } from "@/helper/CONST";
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { total } = await getCampers();
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string>>;
+}): Promise<Metadata> {
+  const resolvedParams = await searchParams;
+  const { total } = await getCampers(resolvedParams);
 
   return {
     title: `Catalog (${total}) | TravelTrucks`,
@@ -20,8 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function CatalogPage() {
-  const data = await getCampers();
+export default async function CatalogPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string>>;
+}) {
+  const resolvedParams = await searchParams;
+  const data = await getCampers(resolvedParams);
   const items = data?.items || [];
 
   const jsonLd = {

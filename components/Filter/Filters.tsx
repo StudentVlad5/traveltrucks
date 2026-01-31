@@ -37,7 +37,6 @@ export const Filters = ({
   const reduxFilters = useAppSelector((state) => state.filters);
 
   const currentFiltersFromUrl = useMemo((): FiltersState => {
-    if (searchParams.size === 0) return reduxFilters;
     const params: FiltersState = { ...initialState };
     searchParams.forEach((value, key) => {
       if (key in initialState) {
@@ -51,29 +50,36 @@ export const Filters = ({
       }
     });
     return params;
-  }, [searchParams, reduxFilters]);
+  }, [searchParams]);
 
   const [draftFilters, setDraftFilters] = useState<FiltersState>(
-    currentFiltersFromUrl,
+    searchParams.size !== 0 ? currentFiltersFromUrl : reduxFilters,
   );
 
   useEffect(() => {
-    setDraftFilters(currentFiltersFromUrl);
-  }, [currentFiltersFromUrl]);
+    const hasReduxFilters =
+      JSON.stringify(reduxFilters) !== JSON.stringify(initialState);
 
-  useEffect(() => {
-    if (
-      JSON.stringify(reduxFilters) !== JSON.stringify(currentFiltersFromUrl)
-    ) {
-      dispatch(setAllFilters(currentFiltersFromUrl));
+    if (searchParams.size === 0 && hasReduxFilters) {
+      const params = new URLSearchParams();
+
+      Object.entries(reduxFilters).forEach(([key, value]) => {
+        if (value === true || (typeof value === "string" && value.length > 0)) {
+          params.set(key, String(value));
+        }
+      });
+      router.replace(`${pathname}?${params.toString()}`);
     }
-  }, [currentFiltersFromUrl, dispatch, reduxFilters]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleEquipmentChange = (id: string) => {
     setDraftFilters((prev) => {
-      if (["AC", "bathroom", "kitchen", "TV"].includes(id)) {
-        const key = id as BooleanFilterKeys;
-        return { ...prev, [key]: !prev[key] };
+      if (LOGIC_FILTER.booleanParams.includes(id)) {
+        return {
+          ...prev,
+          [id]: !prev[id as keyof FiltersState],
+        };
       }
       if (id === "transmission") {
         return {
@@ -95,23 +101,20 @@ export const Filters = ({
   const handleSearch = () => {
     const params = new URLSearchParams();
 
-    (
-      Object.entries(draftFilters) as [
-        keyof FiltersState,
-        string | boolean | null,
-      ][]
-    ).forEach(([key, value]) => {
-      if (value && value !== initialState[key]) {
-        params.set(String(key), String(value));
+    Object.entries(draftFilters).forEach(([key, value]) => {
+      if (value === true || (typeof value === "string" && value.length > 0)) {
+        params.set(key, String(value));
       }
     });
 
+    dispatch(setAllFilters(draftFilters));
     router.push(`${pathname}?${params.toString()}`);
     setVisibleCount(COUNT_OF_TRUCKS_CARD);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleReset = () => {
+    setDraftFilters(initialState);
     router.push(pathname);
     dispatch(resetFilters());
     setVisibleCount(COUNT_OF_TRUCKS_CARD);

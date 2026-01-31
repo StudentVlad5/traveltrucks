@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +11,7 @@ import { STORAGE_KEY } from "@/helper/CONST";
 import { toast } from "react-hot-toast";
 import { Button } from "../UI/Button/Button";
 
-export const BookingForm = () => {
+export const BookingForm = React.memo(() => {
   const {
     register,
     handleSubmit,
@@ -114,6 +114,9 @@ export const BookingForm = () => {
               <DatePicker
                 id="bookingDate"
                 name="bookingDate"
+                preventOpenOnFocus
+                shouldCloseOnSelect
+                autoFocus={false}
                 formatWeekDay={(nameOfDay) =>
                   nameOfDay.toUpperCase().slice(0, 3)
                 }
@@ -150,4 +153,6 @@ export const BookingForm = () => {
       </form>
     </div>
   );
-};
+});
+
+BookingForm.displayName = "BookingForm";

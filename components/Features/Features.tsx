@@ -1,8 +1,5 @@
 "use client";
-import {
-  selectCamperLoading,
-  selectCurrentItem,
-} from "@/store/Camper/camperSelectors";
+import { selectCurrentItem } from "@/store/Camper/camperSelectors";
 import { useAppSelector } from "@/store/hooks";
 import { CamperFeatures } from "@/components/CamperFeatures/CamperFeatures";
 import { VEHICLE_DETAILS_CONFIG } from "@/helper/CONST";

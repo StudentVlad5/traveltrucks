@@ -8,6 +8,11 @@ export interface FiltersState {
   bathroom: boolean;
   kitchen: boolean;
   TV: boolean;
+  radio: boolean;
+  refrigerator: boolean;
+  microwave: boolean;
+  gas: boolean;
+  water: boolean;
   [key: string]: string | boolean | undefined | null;
 }
 
@@ -20,7 +25,15 @@ export interface FilterCardProps {
 
 export type BooleanFilterKeys = keyof Pick<
   FiltersState,
-  "AC" | "bathroom" | "kitchen" | "TV"
+  | "AC"
+  | "bathroom"
+  | "kitchen"
+  | "TV"
+  | "radio"
+  | "refrigerator"
+  | "microwave"
+  | "gas"
+  | "water"
 >;
 export type ValueFilterKeys = keyof Pick<
   FiltersState,

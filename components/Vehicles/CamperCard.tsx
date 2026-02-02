@@ -20,7 +20,7 @@ export const CamperCard = ({ camper }: { camper: Camper }) => {
 
   return (
     <div className="flex flex-col md:flex-row gap-4 md:gap-6 p-4 md:p-6 border border-gray-light rounded-2xl bg-white">
-      <div className="relative w-full md:w-[290px] h-[200px] md:h-[310px] shrink-0 overflow-hidden rounded-xl">
+      <div className="relative w-full md:w-[240px] lg:w-[290px] h-[200px] md:h-[310px] shrink-0 overflow-hidden rounded-xl">
         <Image
           src={camper.gallery[0].thumb}
           alt={camper.name}
@@ -48,7 +48,7 @@ export const CamperCard = ({ camper }: { camper: Camper }) => {
           <Rating camper={camper} variant="catalog" />
         </div>
 
-        <p className="text-gray-dark text-sm md:text-base line-clamp-2 md:line-clamp-1 mb-4 md:mb-6">
+        <p className="text-gray-dark text-sm md:text-base line-clamp-2 md:line-clamp-1 mb-4 md:mb-6 break-words">
           {camper.description}
         </p>
         <CamperFeatures camper={camper} className="mb-6" />

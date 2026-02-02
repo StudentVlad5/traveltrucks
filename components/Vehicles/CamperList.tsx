@@ -55,18 +55,20 @@ export const CamperList = ({
   return (
     <div className="flex flex-col gap-6">
       <AnimatePresence>
-        {campers.slice(0, visibleCount).map((camper, index) => (
-          <motion.div
-            key={camper.id}
-            id={`camper-${index}`}
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-          >
-            <CamperCard key={camper.id} camper={camper} />
-          </motion.div>
-        ))}
+        <ul>
+          {campers.slice(0, visibleCount).map((camper, index) => (
+            <motion.li
+              key={camper.id}
+              id={`camper-${index}`}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+            >
+              <CamperCard key={camper.id} camper={camper} />
+            </motion.li>
+          ))}
+        </ul>
       </AnimatePresence>
       {visibleCount < campers.length && (
         <div className="flex justify-center mt-8">

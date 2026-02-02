@@ -8,7 +8,7 @@ export const Badge = ({
   icon: string;
   label: string;
 }) => (
-  <motion.div
+  <motion.li
     key={label}
     initial={{ opacity: 0, x: -50 }}
     animate={{ opacity: 1, x: 0 }}
@@ -18,5 +18,5 @@ export const Badge = ({
   >
     <Image src={Icon} alt={label} className="w-4 h-4 md:w-5 md:h-5" />
     {label}
-  </motion.div>
+  </motion.li>
 );

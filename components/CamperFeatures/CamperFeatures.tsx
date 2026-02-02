@@ -8,7 +8,7 @@ export const CamperFeatures = ({
   className = "",
 }: CamperFeaturesProps) => {
   return (
-    <div className={`flex flex-wrap gap-[8px] ${className}`}>
+    <ul className={`flex flex-wrap gap-[8px] ${className}`}>
       {CAMPER_FEATURES_CONFIG.map((feature) => {
         const isVisible = feature.check
           ? feature.check(camper)
@@ -28,6 +28,6 @@ export const CamperFeatures = ({
           />
         );
       })}
-    </div>
+    </ul>
   );
 };

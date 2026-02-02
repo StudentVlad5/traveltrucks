@@ -14,16 +14,18 @@ export const Rating = ({ camper, variant = "catalog" }: RatingProps) => {
 
   return (
     <div className={isDetails ? "mb-[24px]" : "mb-[24px] pr-8"}>
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between items-start gap-4 w-full min-w-0">
         <h2
-          className={`font-semibold text-main  mb-[8px] truncate ${
+          className={`font-semibold text-main mb-[8px] break-words line-clamp-2 min-w-0 flex-1 ${
             isDetails ? "text-[32px]" : "text-lg md:text-2xl"
           }`}
         >
           {camper?.name}
         </h2>
         {!isDetails && (
-          <p className="text-2xl font-semibold">€{camper?.price.toFixed(0)}</p>
+          <p className="text-2xl font-semibold shrink-0">
+            €{camper?.price.toFixed(0)}
+          </p>
         )}
       </div>
       <div
